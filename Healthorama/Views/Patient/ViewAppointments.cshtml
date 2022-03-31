@@ -1,0 +1,264 @@
+﻿@{
+    Layout = null;
+}
+
+<!-- Declare HTML5 -->
+<!DOCTYPE html>
+<!-- Start HTML -->
+<html>
+<!-- Start head -->
+<head>
+    <!-- Set meta tags -->
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- Set title -->
+    <title>My appointments</title>
+    <!-- Declare font -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <!-- Declare font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- Set icon -->
+    <link rel="icon" href="Assets/Icons/main.ico" type="image/x-icon" />
+    <!-- Set Material Kit CSS -->
+    <link href="~/Content/material-dashboard.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+    <!-- End head -->
+</head>
+<!-- Start body -->
+<body class="white-edition">
+    <!-- Start wrapper div -->
+    <div class="wrapper">
+        <!-- Start sidebar div -->
+        <div class="sidebar" data-color="purple" data-background-color="white">
+            <!-- Start logo div -->
+            <div class="logo">
+                <!-- Set the logo -->
+                <a class="simple-text logo-normal"> Healthorama <img src="~/Images/medical.png" alt="logo" /> </a>
+                <!-- End logo div -->
+            </div>
+            <!-- Start sidebar-wrapper div -->
+            <div class="sidebar-wrapper">
+                <!-- Start nav list -->
+                <ul class="nav">
+                    <!-- Start class for the first element of the list -->
+                    <li class="nav-item">
+                        <a class="nav-link" href=@Url.Action("Index","Patient")>
+                            <!-- Set icon -->
+                            <i class="material-icons">home</i>
+                            <!-- Set text -->
+                            <p>
+                                <b>Home</b>
+                            </p>
+                        </a>
+                        <!-- End class for the first element of the list -->
+                    </li>
+                    <!-- Start class for the second element of the list -->
+                    <li class="nav-item">
+                        <!-- Start class nav-link -->
+                        <a class="nav-link" href=@Url.Action("SearchAppointment","Patient")>
+                            <!-- Set icon -->
+                            <i class="material-icons">add_box</i>
+                            <!-- Set text -->
+                            <p>
+                                <b>Search for doctors</b>
+                            </p>
+                            <!-- End class nav-link -->
+                        </a>
+                        <!-- End class for the second element of the list -->
+                    </li>
+                    <!-- Start class for the third element of the list -->
+                    <li class="nav-item active">
+                        <!-- Start class nav-link -->
+                        <a class="nav-link" href=@Url.Action("ViewAppointments","Patient")>
+                            <!-- Set icon -->
+                            <i class="material-icons">calendar_today</i>
+                            <!-- Set text -->
+                            <p>
+                                <b>My appointments</b>
+                            </p>
+                            <!-- End class nav-link -->
+                        </a>
+                        <!-- End class for the third element of the list -->
+                    </li>
+                    <!-- Start class for the forth element of the list -->
+                    <li class="nav-item">
+                        <!-- Start class nav-link -->
+                        <a class="nav-link" href=@Url.Action("Patient","Home")>
+                            <!-- Set icon -->
+                            <i class="material-icons">logout</i>
+                            <!-- Create button -->
+                            <p>
+                                <b>Logout</b>
+                            </p>
+                            <!-- End class nav-link -->
+                        </a>
+                        <!-- End class for the forth element of the list -->
+                    </li>
+                    <!-- End nav list -->
+                </ul>
+                <!-- End sidebar-wrapper div -->
+            </div>
+            <!-- End sidebar div -->
+        </div>
+        <!-- Start main-panel div -->
+        <div class="main-panel">
+            <!-- Start navbar class -->
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+                <!-- Start container-fluid div -->
+                <div class="container-fluid">
+                    <!-- Start navbar-wrapper div -->
+                    <div class="navbar-wrapper">
+                        <!-- Start navbar-brand -->
+                        <a class="navbar-brand">
+                            <b>My appointments</b>
+                        </a>
+                        <!-- End navbar-wrapper div -->
+                    </div>
+                    <!-- End container-fluid div -->
+                </div>
+                <!-- End navbar class -->
+            </nav>
+            <!-- Start content div -->
+            <div class="content">
+                <!-- Start container-fluid div -->
+                <div class="container-fluid">
+                    <div id="calender"></div>
+
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p id="pDetails"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="btnDelete" type="button" class="btn btn-primary">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var events = [];
+            FetchEventAndRenderCalendar();
+            var item;
+
+            function FetchEventAndRenderCalendar() {
+                events = [];
+                $.ajax({
+                    type: "GET",
+                    url: "/Patient/GetAppointments",
+                    success: function (data) {
+                        $.each(data, function (i, v) {
+                            var date_object = v.appointmentTime;
+                            var epoch = parseInt(date_object.split("(")[1].split(")")[0]);
+
+                            events.push({
+                                eventID: v.appointmentID,
+                                title: v.doctorAppointmentAMKA,
+                                start: EpochToDate(epoch)
+                            });
+
+                        })
+
+                        GenerateCalender(events);
+                    },
+                    error: function (error) {
+                        alert('failed');
+                    }
+                })
+            }
+
+
+            function GenerateCalender(events) {
+                $('#calender').fullCalendar('destroy');
+                $('#calender').fullCalendar({
+                    contentHeight: 600,
+                    defaultDate: new Date(),
+                    timeFormat: 'HH:mm:ss',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay,agenda'
+                    },
+                    eventLimit: true,
+                    eventColor: '#378006',
+                    eventTextColor: '#ffffff',
+                    showNonCurrentDates: false,
+                    events: events,
+                    eventClick: function (calEvent, jsEvent, view) {
+
+                        selectedEvent = calEvent;
+                        $('#myModal #eventTitle').text(calEvent.title);
+                        var $description = $('<div/>');
+                        $description.append($('<p/>').html('<b>Start: </b>' + calEvent.start.format("DD-MMM-YYYY HH:mm")));
+
+                        $('#myModal #pDetails').empty().html($description);
+
+                        $('#myModal').modal('show');
+
+                    }
+                })
+            }
+
+
+        })
+
+
+        $(document.getElementById('btnDelete')).click(function () {
+
+            if (selectedEvent != null && confirm('Are you sure ?')) {
+                var data = { id: String(selectedEvent.eventID)};
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Remove", "Patient")',
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data) {
+                            $('#myModal').modal('toggle');
+                            window.location.reload(true);
+                        }
+                    },
+
+                    error: function () {
+                        console.log('Error');
+                    }
+                })
+            }
+        });
+
+
+
+        //Epoch To Date
+        function EpochToDate(epoch) {
+            if (epoch < 10000000000)
+                epoch *= 1000; // convert to milliseconds (Epoch is usually expressed in seconds, but Javascript uses Milliseconds)
+            var epoch = epoch + (new Date().getTimezoneOffset() * -1); //for timeZone
+            return new Date(epoch);
+        }
+    </script>
+
+
+</body>
+</html>

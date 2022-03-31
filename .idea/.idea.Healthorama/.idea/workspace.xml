@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f6bd2666-673d-4036-a3aa-a3d023486fdc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Healthorama/App_Start/BundleConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/App_Start/BundleConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap-theme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap-theme.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Content/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Content/bootstrap.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Content/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Content/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Content/bootstrap.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Healthorama.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Healthorama.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/ADMIN.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Models/ADMIN.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/APPOINTMENT.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Models/APPOINTMENT.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DOCTOR.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Models/DOCTOR.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DataModel.Context.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DataModel.Context.tt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DataModel.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DataModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DataModel.edmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DataModel.edmx.diagram" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/DataModel.tt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Models/PATIENT.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Models/PATIENT.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Scripts/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Scripts/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery-3.4.1.intellisense.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery-3.4.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery-3.4.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery-3.4.1.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery-3.4.1.slim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery-3.4.1.slim.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery-3.4.1.slim.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate-vsdoc.js" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate-vsdoc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.unobtrusive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.unobtrusive.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Scripts/jquery.validate.unobtrusive.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/Web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Healthorama/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Healthorama/packages.config" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="24WKbfNWATT0fMNTqCeCzRKjKer" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1643740979907</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643740979907</updated>
+      <workItem from="1643740982342" duration="277000" />
+      <workItem from="1643741278799" duration="159000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

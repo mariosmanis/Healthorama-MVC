@@ -1,0 +1,212 @@
+﻿@model Healthorama.Models.DOCTOR
+
+@{
+    Layout = null;
+}
+
+<!-- Declare HTML5 -->
+<!DOCTYPE html>
+<!-- Start HTML -->
+<html>
+<!-- Start head -->
+<head>
+    <!-- Set meta tags -->
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- Set title -->
+    <title>Home Page</title>
+    <!-- Declare font -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <!-- Declare font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- Set icon -->
+    <link rel="icon" href="Assets/Icons/main.ico" type="image/x-icon" />
+    <!-- Set Material Kit CSS -->
+    <link href="~/Content/material-dashboard.css" rel="stylesheet" />
+    <!-- Start of custom style changes -->
+    <style>
+        /* Logout button */
+        .button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            padding: 0px;
+            color: #3c4858;
+        }
+    </style>
+    <!-- End of custom style changes -->
+    <!-- End head -->
+</head>
+    <!-- Start body -->
+    <body class="white-edition">
+        <!-- Start wrapper div -->
+        <div class="wrapper">
+            <!-- Start sidebar div -->
+            <div class="sidebar" data-color="purple" data-background-color="white">
+                <!-- Start logo div -->
+                <div class="logo">
+                    <!-- Set the logo -->
+                    <a class="simple-text logo-normal"> Healthorama <img src="~/Images/medical.png" alt="logo" /> </a>
+                    <!-- End logo div -->
+                </div>
+                <!-- Start sidebar-wrapper div -->
+                <div class="sidebar-wrapper">
+                    <!-- Start nav list -->
+                    <ul class="nav">
+                        <!-- Start class for the first element of the list -->
+                        <li class="nav-item">
+                            <a class="nav-link" href=@Url.Action("Index","Admin")>
+                                <!-- Set icon -->
+                                <i class="material-icons">home</i>
+                                <!-- Set text -->
+                                <p>
+                                    <b>Home</b>
+                                </p>
+                            </a>
+                            <!-- End class for the first element of the list -->
+                        </li>
+                        <!-- Start class for the second element of the list -->
+                        <li class="nav-item active">
+                            <!-- Start class nav-link -->
+                            <a class="nav-link" href=@Url.Action("RegisterDoctor","Admin")>
+                                <!-- Set icon -->
+                                <i class="material-icons">medication</i>
+                                <!-- Set text -->
+                                <p>
+                                    <b>Register Doctor</b>
+                                </p>
+                                <!-- End class nav-link -->
+                            </a>
+                            <!-- End class for the second element of the list -->
+                        </li>
+                        <!-- Start class for the third element of the list -->
+                        <li class="nav-item">
+                            <!-- Start class nav-link -->
+                            <a class="nav-link" href=@Url.Action("RegisterPatient","Admin")>
+                                <!-- Set icon -->
+                                <i class="material-icons">masks</i>
+                                <!-- Set text -->
+                                <p>
+                                    <b>Register Patient</b>
+                                </p>
+                                <!-- End class nav-link -->
+                            </a>
+                            <!-- End class for the third element of the list -->
+                        </li>
+                        <!-- Start class for the forth element of the list -->
+                        <li class="nav-item">
+                            <!-- Start class nav-link -->
+                            <a class="nav-link" href=@Url.Action("Logout","Admin")>
+                                <!-- Set icon -->
+                                <i class="material-icons">logout</i>
+                                <!-- Create button -->
+                                <p>
+                                    <b>Logout</b>
+                                </p>
+                                <!-- End class nav-link -->
+                            </a>
+                            <!-- End class for the forth element of the list -->
+                        </li>
+                        <!-- End nav list -->
+                    </ul>
+                    <!-- End sidebar-wrapper div -->
+                </div>
+                <!-- End sidebar div -->
+            </div>
+            <!-- Start main-panel div -->
+            <div class="main-panel">
+                <!-- Start navbar class -->
+                <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+                    <!-- Start container-fluid div -->
+                    <div class="container-fluid">
+                        <!-- Start navbar-wrapper div -->
+                        <div class="navbar-wrapper">
+                            <!-- Start navbar-brand -->
+                            <a class="navbar-brand">
+                                <b>Register Doctor</b>
+                            </a>
+                            <!-- End navbar-wrapper div -->
+                        </div>
+                        <!-- End container-fluid div -->
+                    </div>
+                    <!-- End navbar class -->
+                </nav>
+                <div class="content">
+                    @using (Html.BeginForm("RegisterDoctor", "Admin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form">                                                 
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.doctorAMKA, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.doctorAMKA, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.doctorName, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.doctorName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.doctorSurname, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.doctorSurname, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.doctorUsername, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.doctorUsername, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.doctorSpeciality, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.doctorSpeciality, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.doctorPassword, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.doctorPassword, new { htmlAttributes = new { @class = "form-control", @Type = "password" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-2">
+                                <label class="label-success">@ViewBag.SuccessMessage</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- End main-panel div -->
+            </div>
+            <!-- End wrapper div -->
+        </div>
+        
+
+        <!-- Import jquery script -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- Import popper script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <!-- Import bootstrap script -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Control Center for Material Dashboard -->
+        <script src="~/Scripts/material-dashboard.js"></script>
+    </body>
+</html>

@@ -1,0 +1,179 @@
+﻿@model Healthorama.Models.DOCTOR_AVAILABILITY
+
+
+@{
+    Layout = null;
+}
+
+
+<!-- Declare HTML5 -->
+<!DOCTYPE html>
+<!-- Start HTML -->
+<html>
+<!-- Start head -->
+<head>
+    <!-- Set meta tags -->
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- Set title -->
+    <title>Register availability</title>
+    <!-- Declare font -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <!-- Declare font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- Set icon -->
+    <link rel="icon" href="Assets/Icons/main.ico" type="image/x-icon" />
+    <!-- Set Material Kit CSS -->
+    <link href="~/Content/material-dashboard.css" rel="stylesheet" />
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+    <!-- End of custom style changes -->
+    <!-- End head -->
+</head>
+<!-- Start body -->
+<body class="white-edition">
+    <!-- Start wrapper div -->
+    <div class="wrapper">
+        <!-- Start sidebar div -->
+        <div class="sidebar" data-color="purple" data-background-color="white">
+            <!-- Start logo div -->
+            <div class="logo">
+                <!-- Set the logo -->
+                <a class="simple-text logo-normal"> Healthorama <img src="~/Images/medical.png" alt="logo" /> </a>
+                <!-- End logo div -->
+            </div>
+            <!-- Start sidebar-wrapper div -->
+            <div class="sidebar-wrapper">
+                <!-- Start nav list -->
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href=@Url.Action("Index","Doctor")>
+                            <!-- Set icon -->
+                            <i class="material-icons">home</i>
+                            <!-- Set text -->
+                            <p>
+                                <b>Home</b>
+                            </p>
+                        </a>
+                    </li>
+                    <!-- Start class for the first element of the list -->
+                    <li class="nav-item active">
+                        <!-- Start class nav-link -->
+                        <a class="nav-link" href=@Url.Action("RegisterAvailability","Doctor")>
+                            <!-- Set icon -->
+                            <i class="material-icons">add_box</i>
+                            <!-- Set text -->
+                            <p>
+                                <b>Register availability</b>
+                            </p>
+                            <!-- End class nav-link -->
+                        </a>
+                        <!-- End class for the first element of the list -->
+                    </li>
+                    <!-- Start class for the second element of the list -->
+                    <li class="nav-item">
+                        <!-- Start class nav-link -->
+                        <a class="nav-link" href=@Url.Action("ViewAppointments","Doctor")>
+                            <!-- Set icon -->
+                            <i class="material-icons">calendar_today</i>
+                            <!-- Set text -->
+                            <p>
+                                <b>My appointments</b>
+                            </p>
+                            <!-- End class nav-link -->
+                        </a>
+                        <!-- End class for the second element of the list -->
+                    </li>
+                    <!-- Start class for the forth element of the list -->
+                    <li class="nav-item">
+                        <!-- Start class nav-link -->
+                        <a class="nav-link" href=@Url.Action("Logout","Doctor")>
+                            <!-- Set icon -->
+                            <i class="material-icons">logout</i>
+                            <!-- Create button -->
+                            <p>
+                                <b>Logout</b>
+                            </p>
+                            <!-- End class nav-link -->
+                        </a>
+                        <!-- End class for the forth element of the list -->
+                    </li>
+                    <!-- End nav list -->
+                </ul>
+                <!-- End sidebar-wrapper div -->
+            </div>
+            <!-- End sidebar div -->
+        </div>
+        <!-- Start main-panel div -->
+        <div class="main-panel">
+            <!-- Start navbar class -->
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+                <!-- Start container-fluid div -->
+                <div class="container-fluid">
+                    <!-- Start navbar-wrapper div -->
+                    <div class="navbar-wrapper">
+                        <!-- Start navbar-brand -->
+                        <a class="navbar-brand">
+                            <b>Register availability</b>
+                        </a>
+                        <!-- End navbar-wrapper div -->
+                    </div>
+                    <!-- End container-fluid div -->
+                </div>
+                <!-- End navbar class -->
+            </nav>
+            <!-- Start content div -->
+            <div class="content">
+                <!-- Start container-fluid div -->
+                <div class="container-fluid">
+                    @using (Html.BeginForm("RegisterAvailability", "Doctor", FormMethod.Post))
+                     {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.doctorAMKA, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.doctorAMKA, new { @class = "form-control-plaintext", @readonly = "readonly", @Value = Session["doctorAMKA"] })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.availabilityStart, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.availabilityStart, new { htmlAttributes = new { @class = "datepicker", @Value = "", @Placeholder = "YYYY/MM/DD HH:mm" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.availabilityEnd, htmlAttributes: new { @class = "control-label col-md-2 text-dark" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.availabilityEnd, new { htmlAttributes = new { @class = "datepicker", @Value = "", @Placeholder = "YYYY/MM/DD HH:mm" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </div>
+                     }
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datetimepicker({
+                startDate: null,         
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>
+
+
+
+

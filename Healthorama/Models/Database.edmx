@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HealthoramaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adminUsername" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="adminPassword" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APPOINTMENT">
+          <Key>
+            <PropertyRef Name="appointmentID" />
+          </Key>
+          <Property Name="appointmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appointmentTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="patientAppointmentAMKA" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="doctorAppointmentAMKA" Type="varchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCTOR">
+          <Key>
+            <PropertyRef Name="doctorAMKA" />
+          </Key>
+          <Property Name="doctorAMKA" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="doctorName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="doctorSurname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="doctorUsername" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="doctorSpeciality" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="doctorPassword" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCTOR_AVAILABILITY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctorAMKA" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="availabilityStart" Type="smalldatetime" Nullable="false" />
+          <Property Name="availabilityEnd" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PATIENT">
+          <Key>
+            <PropertyRef Name="patientAMKA" />
+          </Key>
+          <Property Name="patientAMKA" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="patientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="patientSurname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="patientPassword" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__APPOINTME__docto__2F10007B">
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCTOR">
+              <PropertyRef Name="doctorAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="doctorAppointmentAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__APPOINTME__patie__2E1BDC42">
+          <End Role="PATIENT" Type="Self.PATIENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PATIENT">
+              <PropertyRef Name="patientAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="patientAppointmentAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DOCTOR_AV__docto__2B3F6F97">
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DOCTOR_AVAILABILITY" Type="Self.DOCTOR_AVAILABILITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCTOR">
+              <PropertyRef Name="doctorAMKA" />
+            </Principal>
+            <Dependent Role="DOCTOR_AVAILABILITY">
+              <PropertyRef Name="doctorAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthoramaModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPOINTMENT" EntityType="Self.APPOINTMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCTOR" EntityType="Self.DOCTOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCTOR_AVAILABILITY" EntityType="Self.DOCTOR_AVAILABILITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PATIENT" EntityType="Self.PATIENT" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__APPOINTME__docto__2F10007B" Association="Self.FK__APPOINTME__docto__2F10007B">
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__APPOINTME__patie__2E1BDC42" Association="Self.FK__APPOINTME__patie__2E1BDC42">
+            <End Role="PATIENT" EntitySet="PATIENT" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DOCTOR_AV__docto__2B3F6F97" Association="Self.FK__DOCTOR_AV__docto__2B3F6F97">
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+            <End Role="DOCTOR_AVAILABILITY" EntitySet="DOCTOR_AVAILABILITY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthoramaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adminUsername" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adminPassword" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APPOINTMENT">
+          <Key>
+            <PropertyRef Name="appointmentID" />
+          </Key>
+          <Property Name="appointmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appointmentTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="patientAppointmentAMKA" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorAppointmentAMKA" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOCTOR" Relationship="Self.FK__APPOINTME__docto__2F10007B" FromRole="APPOINTMENT" ToRole="DOCTOR" />
+          <NavigationProperty Name="PATIENT" Relationship="Self.FK__APPOINTME__patie__2E1BDC42" FromRole="APPOINTMENT" ToRole="PATIENT" />
+        </EntityType>
+        <EntityType Name="DOCTOR">
+          <Key>
+            <PropertyRef Name="doctorAMKA" />
+          </Key>
+          <Property Name="doctorAMKA" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorSurname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorUsername" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorSpeciality" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorPassword" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK__APPOINTME__docto__2F10007B" FromRole="DOCTOR" ToRole="APPOINTMENT" />
+          <NavigationProperty Name="DOCTOR_AVAILABILITY" Relationship="Self.FK__DOCTOR_AV__docto__2B3F6F97" FromRole="DOCTOR" ToRole="DOCTOR_AVAILABILITY" />
+        </EntityType>
+        <EntityType Name="DOCTOR_AVAILABILITY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctorAMKA" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="availabilityStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="availabilityEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="DOCTOR" Relationship="Self.FK__DOCTOR_AV__docto__2B3F6F97" FromRole="DOCTOR_AVAILABILITY" ToRole="DOCTOR" />
+        </EntityType>
+        <EntityType Name="PATIENT">
+          <Key>
+            <PropertyRef Name="patientAMKA" />
+          </Key>
+          <Property Name="patientAMKA" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patientSurname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patientPassword" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK__APPOINTME__patie__2E1BDC42" FromRole="PATIENT" ToRole="APPOINTMENT" />
+        </EntityType>
+        <Association Name="FK__APPOINTME__docto__2F10007B">
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCTOR">
+              <PropertyRef Name="doctorAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="doctorAppointmentAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__APPOINTME__patie__2E1BDC42">
+          <End Role="PATIENT" Type="Self.PATIENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PATIENT">
+              <PropertyRef Name="patientAMKA" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="patientAppointmentAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DOCTOR_AV__docto__2B3F6F97">
+          <End Role="DOCTOR" Type="Self.DOCTOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DOCTOR_AVAILABILITY" Type="Self.DOCTOR_AVAILABILITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCTOR">
+              <PropertyRef Name="doctorAMKA" />
+            </Principal>
+            <Dependent Role="DOCTOR_AVAILABILITY">
+              <PropertyRef Name="doctorAMKA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthoramaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
+          <EntitySet Name="APPOINTMENT" EntityType="Self.APPOINTMENT" />
+          <EntitySet Name="DOCTOR" EntityType="Self.DOCTOR" />
+          <EntitySet Name="DOCTOR_AVAILABILITY" EntityType="Self.DOCTOR_AVAILABILITY" />
+          <EntitySet Name="PATIENT" EntityType="Self.PATIENT" />
+          <AssociationSet Name="FK__APPOINTME__docto__2F10007B" Association="Self.FK__APPOINTME__docto__2F10007B">
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__APPOINTME__patie__2E1BDC42" Association="Self.FK__APPOINTME__patie__2E1BDC42">
+            <End Role="PATIENT" EntitySet="PATIENT" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DOCTOR_AV__docto__2B3F6F97" Association="Self.FK__DOCTOR_AV__docto__2B3F6F97">
+            <End Role="DOCTOR" EntitySet="DOCTOR" />
+            <End Role="DOCTOR_AVAILABILITY" EntitySet="DOCTOR_AVAILABILITY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthoramaModelStoreContainer" CdmEntityContainer="HealthoramaEntities">
+          <EntitySetMapping Name="ADMIN">
+            <EntityTypeMapping TypeName="HealthoramaModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="adminID" ColumnName="adminID" />
+                <ScalarProperty Name="adminUsername" ColumnName="adminUsername" />
+                <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPOINTMENT">
+            <EntityTypeMapping TypeName="HealthoramaModel.APPOINTMENT">
+              <MappingFragment StoreEntitySet="APPOINTMENT">
+                <ScalarProperty Name="appointmentID" ColumnName="appointmentID" />
+                <ScalarProperty Name="appointmentTime" ColumnName="appointmentTime" />
+                <ScalarProperty Name="patientAppointmentAMKA" ColumnName="patientAppointmentAMKA" />
+                <ScalarProperty Name="doctorAppointmentAMKA" ColumnName="doctorAppointmentAMKA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCTOR">
+            <EntityTypeMapping TypeName="HealthoramaModel.DOCTOR">
+              <MappingFragment StoreEntitySet="DOCTOR">
+                <ScalarProperty Name="doctorAMKA" ColumnName="doctorAMKA" />
+                <ScalarProperty Name="doctorName" ColumnName="doctorName" />
+                <ScalarProperty Name="doctorSurname" ColumnName="doctorSurname" />
+                <ScalarProperty Name="doctorUsername" ColumnName="doctorUsername" />
+                <ScalarProperty Name="doctorSpeciality" ColumnName="doctorSpeciality" />
+                <ScalarProperty Name="doctorPassword" ColumnName="doctorPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCTOR_AVAILABILITY">
+            <EntityTypeMapping TypeName="HealthoramaModel.DOCTOR_AVAILABILITY">
+              <MappingFragment StoreEntitySet="DOCTOR_AVAILABILITY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="doctorAMKA" ColumnName="doctorAMKA" />
+                <ScalarProperty Name="availabilityStart" ColumnName="availabilityStart" />
+                <ScalarProperty Name="availabilityEnd" ColumnName="availabilityEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PATIENT">
+            <EntityTypeMapping TypeName="HealthoramaModel.PATIENT">
+              <MappingFragment StoreEntitySet="PATIENT">
+                <ScalarProperty Name="patientAMKA" ColumnName="patientAMKA" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="patientName" ColumnName="patientName" />
+                <ScalarProperty Name="patientSurname" ColumnName="patientSurname" />
+                <ScalarProperty Name="patientPassword" ColumnName="patientPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
